@@ -21,6 +21,8 @@ public class HIVLab {
     // Make sure mickey can get reanimated if he dies
     private static void experiment(LabRat rat,
                                    Consumer<LabRat> experiment) {
+        Memento memento = rat.createMemento();
         experiment.accept(rat);
+        if (!rat.isAlive()) rat.setMemento(memento);
     }
 }
