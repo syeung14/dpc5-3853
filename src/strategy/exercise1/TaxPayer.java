@@ -7,21 +7,18 @@
  */
 package strategy.exercise1;
 
+import java.util.Objects;
+
 public class TaxPayer {
-    public static final int COMPANY = 0;
-    public static final int EMPLOYEE = 1;
-    public static final int TRUST = 2;
+    public static final TaxStrategy COMPANY = new CompanyTaxStrategy();
+    public static final TaxStrategy EMPLOYEE = new EmployeeTaxStrategy();
+    public static final TaxStrategy TRUST = new TrustTaxStrategy();
 
     private final TaxStrategy strategy;
     private final double income;
 
-    public TaxPayer(int type, double income) {
-        this.strategy = switch (type) {
-            case COMPANY -> new CompanyTaxStrategy();
-            case EMPLOYEE -> new EmployeeTaxStrategy();
-            case TRUST -> new TrustTaxStrategy();
-            default -> throw new IllegalArgumentException();
-        };
+    public TaxPayer(TaxStrategy strategy, double income) {
+        this.strategy = Objects.requireNonNull(strategy);
         this.income = income;
     }
 
@@ -30,33 +27,33 @@ public class TaxPayer {
     }
 
     public double extortCash() {
-        return strategy.extortCash();
+        return strategy.extortCash(this);
     }
 
-    private class CompanyTaxStrategy implements TaxStrategy {
+    private static class CompanyTaxStrategy implements TaxStrategy {
         private static final double RATE = 0.30;
 
         @Override
-        public double extortCash() {
-            return getIncome() * RATE;
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
         }
     }
 
-    private class EmployeeTaxStrategy implements TaxStrategy {
+    private static class EmployeeTaxStrategy implements TaxStrategy {
         private static final double RATE = 0.45;
 
         @Override
-        public double extortCash() {
-            return getIncome() * RATE;
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
         }
     }
 
-    private class TrustTaxStrategy implements TaxStrategy {
+    private static class TrustTaxStrategy implements TaxStrategy {
         private static final double RATE = 0.35;
 
         @Override
-        public double extortCash() {
-            return getIncome() * RATE;
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
         }
     }
 }
