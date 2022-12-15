@@ -7,14 +7,17 @@
  */
 package builder.exercise1;
 
+import java.util.Optional;
+import java.util.OptionalInt;
+
 public class ThreadBuilder {
     private final Runnable target;
     private final String name;
     private ThreadGroup threadGroup;
     private long stackSize;
     private boolean inheritThreadLocals;
-    private Boolean daemon;
-    private Integer priority;
+    private Optional<Boolean> daemon = Optional.empty();
+    private OptionalInt priority = OptionalInt.empty();
     private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
     public ThreadBuilder(Runnable target, String name) {
@@ -24,8 +27,8 @@ public class ThreadBuilder {
 
     public Thread build() {
         var thread = new Thread(threadGroup, target, name, stackSize, inheritThreadLocals);
-        if (daemon != null) thread.setDaemon(daemon);
-        if (priority != null) thread.setPriority(priority);
+        daemon.ifPresent(thread::setDaemon);
+        priority.ifPresent(thread::setPriority);
         thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
         return thread;
     }
@@ -52,12 +55,12 @@ public class ThreadBuilder {
     }
 
     public ThreadBuilder daemon(boolean daemon) {
-        this.daemon = daemon;
+        this.daemon = Optional.of(daemon);
         return this;
     }
 
     public ThreadBuilder priority(int priority) {
-        this.priority = priority;
+        this.priority = OptionalInt.of(priority);
         return this;
     }
 
