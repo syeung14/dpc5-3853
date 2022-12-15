@@ -8,6 +8,33 @@
 package strategy.exercise1;
 
 //DON'T CHANGE
-public interface TaxStrategy {
-    double extortCash(TaxPayer payer);
+public enum TaxStrategy {
+    COMPANY {
+        private static final double RATE = 0.30;
+
+        @Override
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
+        }
+    },
+
+    EMPLOYEE {
+        private static final double RATE = 0.45;
+
+        @Override
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
+        }
+    },
+
+    TRUST {
+        private static final double RATE = 0.35;
+
+        @Override
+        public double extortCash(TaxPayer payer) {
+            return payer.getIncome() * RATE;
+        }
+    };
+
+    abstract double extortCash(TaxPayer payer);
 }

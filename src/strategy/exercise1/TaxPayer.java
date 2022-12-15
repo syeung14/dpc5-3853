@@ -10,9 +10,9 @@ package strategy.exercise1;
 import java.util.Objects;
 
 public class TaxPayer {
-    public static final TaxStrategy COMPANY = new CompanyTaxStrategy();
-    public static final TaxStrategy EMPLOYEE = new EmployeeTaxStrategy();
-    public static final TaxStrategy TRUST = new TrustTaxStrategy();
+    public static final TaxStrategy COMPANY = TaxStrategy.COMPANY;
+    public static final TaxStrategy EMPLOYEE = TaxStrategy.EMPLOYEE;
+    public static final TaxStrategy TRUST = TaxStrategy.TRUST;
 
     private final TaxStrategy strategy;
     private final double income;
@@ -30,30 +30,4 @@ public class TaxPayer {
         return strategy.extortCash(this);
     }
 
-    private static class CompanyTaxStrategy implements TaxStrategy {
-        private static final double RATE = 0.30;
-
-        @Override
-        public double extortCash(TaxPayer payer) {
-            return payer.getIncome() * RATE;
-        }
-    }
-
-    private static class EmployeeTaxStrategy implements TaxStrategy {
-        private static final double RATE = 0.45;
-
-        @Override
-        public double extortCash(TaxPayer payer) {
-            return payer.getIncome() * RATE;
-        }
-    }
-
-    private static class TrustTaxStrategy implements TaxStrategy {
-        private static final double RATE = 0.35;
-
-        @Override
-        public double extortCash(TaxPayer payer) {
-            return payer.getIncome() * RATE;
-        }
-    }
 }
