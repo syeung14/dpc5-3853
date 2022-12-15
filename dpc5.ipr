@@ -445,7 +445,6 @@
       <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="BatchJobDomInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="BatchXmlDomInspection" enabled="false" level="ERROR" enabled_by_default="false" />
-      <inspection_tool class="BigDecimalLegacyMethod" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="BigDecimalMethodWithoutRoundingCalled" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="BindingAnnotationWithoutInject" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="BooleanConstructor" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -534,6 +533,7 @@
       <inspection_tool class="ConstantIfStatement" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="ConstantIfStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="ConstantStringIntern" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="ConstantValue" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="ConstraintValidatorCreator" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="ContextComponentScanInconsistencyInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="ContextJavaBeanUnresolvedMethodsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -996,6 +996,7 @@
       <inspection_tool class="JavaReflectionMemberAccess" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="JavaRequiresAutoModule" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="JavacQuirks" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="JavadocDeclaration" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="JavadocReference" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="JavaeeApplicationDomInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="JdkProxiedBeanTypeInspection" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -1086,6 +1087,39 @@
       <inspection_tool class="MissedExecutable" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="MissingAspectjAutoproxyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="MissingFinalNewline" enabled="false" level="ERROR" enabled_by_default="false" />
+      <inspection_tool class="MissingJavadoc" enabled="false" level="WARNING" enabled_by_default="false">
+        <option name="PACKAGE_SETTINGS">
+          <Options>
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+        <option name="MODULE_SETTINGS">
+          <Options>
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+        <option name="TOP_LEVEL_CLASS_SETTINGS">
+          <Options>
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+        <option name="INNER_CLASS_SETTINGS">
+          <Options>
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+        <option name="METHOD_SETTINGS">
+          <Options>
+            <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+        <option name="FIELD_SETTINGS">
+          <Options>
+            <option name="ENABLED" value="false" />
+          </Options>
+        </option>
+      </inspection_tool>
       <inspection_tool class="MissingMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="MissingOverrideAnnotation" enabled="false" level="INFORMATION" enabled_by_default="false">
         <option name="ignoreObjectMethods" value="true" />
@@ -1144,6 +1178,9 @@
       <inspection_tool class="PagesFileModelInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="PagesModelInspection" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="ParameterCanBeLocal" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="ParametersPerConstructor" enabled="true" level="WARNING" enabled_by_default="true">
+        <option name="m_limit" value="3" />
+      </inspection_tool>
       <inspection_tool class="PathAnnotation" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="PatternNotApplicable" enabled="false" level="ERROR" enabled_by_default="false" />
       <inspection_tool class="PatternOverriddenByNonAnnotatedMethod" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -1585,7 +1622,7 @@
       </inspection_tool>
       <inspection_tool class="gwtRawAsyncCallback" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="osmorcNonOsgiMavenDependency" enabled="false" level="WARNING" enabled_by_default="false" />
-      <inspection_tool class="unused" enabled="false" level="WARNING" enabled_by_default="false" isSelected="true">
+      <inspection_tool class="unused" enabled="false" level="WARNING" enabled_by_default="false" checkParameterExcludingHierarchy="false" isSelected="true">
         <option name="LOCAL_VARIABLE" value="true" />
         <option name="FIELD" value="true" />
         <option name="METHOD" value="true" />
