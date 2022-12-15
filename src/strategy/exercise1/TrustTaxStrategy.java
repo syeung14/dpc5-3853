@@ -9,7 +9,7 @@
 package strategy.exercise1;
 
 public class TrustTaxStrategy implements TaxStrategy {
-    public static final double RATE = 0.35;
+    private static final double RATE = 0.35;
     private final TaxPayer payer;
 
     public TrustTaxStrategy(TaxPayer payer) {
