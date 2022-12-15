@@ -16,5 +16,8 @@ public class ReceiverOfRevenue {
         System.out.println(heinz.extortCash());
         System.out.println(maxsol.extortCash());
         System.out.println(family.extortCash());
+
+//        var giorgos = new TaxPayer(payer -> 0.0, 10_000_000);
+//        System.out.println(giorgos.extortCash());
     }
 }

@@ -8,6 +8,10 @@
 package strategy.exercise1;
 
 //DON'T CHANGE
-public interface TaxStrategy {
-    double extortCash();
+public sealed interface TaxStrategy permits
+    CompanyTaxStrategy, EmployeeTaxStrategy, TrustTaxStrategy {
+    TaxStrategy COMPANY = new CompanyTaxStrategy();
+    TaxStrategy EMPLOYEE = new EmployeeTaxStrategy();
+    TaxStrategy TRUST = new TrustTaxStrategy();
+    double extortCash(TaxPayer payer);
 }
