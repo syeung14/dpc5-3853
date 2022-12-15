@@ -7,7 +7,10 @@
  */
 package composite.exercise1;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
 
 /**
  * This ContactIterator should iterate through the composite tree structure
@@ -15,16 +18,38 @@ import java.util.*;
  * whether there is a next element or not.
  */
 public class ContactIterator implements Iterator<Contact> {
+    private final Deque<Iterator<Contact>> unfinishedIterators = new ArrayDeque<>();
+    private Contact nextContact;
+    private Iterator<Contact> lastUsedIterator;
+
+    private final Iterator<Contact> leaves;
+
     public ContactIterator(Contact contact) {
-        throw new UnsupportedOperationException("todo");
+        ArrayList<Contact> temp = new ArrayList<>();
+        findAllLeaves(contact, temp);
+        leaves = temp.iterator();
+    }
+
+    private void findAllLeaves(Contact contact, ArrayList<Contact> leaves) {
+        if (contact.isLeaf()) leaves.add(contact);
+        else {
+            for (Iterator<Contact> it = contact.children(); it.hasNext(); ) {
+                findAllLeaves(it.next(), leaves);
+            }
+        }
     }
 
     public boolean hasNext() {
-        throw new UnsupportedOperationException("todo");
+        if (nextContact == null) nextContact = findNextLeaf();
+        return nextContact != null;
+    }
+
+    private Contact findNextLeaf() {
+        // walk down the tree and find the next leaf...
     }
 
     public Contact next() {
-        throw new UnsupportedOperationException("todo");
+        return leaves.next();
     }
 
     /**

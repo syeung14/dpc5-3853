@@ -25,4 +25,14 @@ public class DistributionList implements Contact {
     public void remove(Contact contact) {
         contacts.remove(contact);
     }
+
+    @Override
+    public boolean isLeaf() {
+        return false;
+    }
+
+    @Override
+    public Iterator<Contact> children() {
+        return contacts.iterator();
+    }
 }

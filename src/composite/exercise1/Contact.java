@@ -16,10 +16,10 @@ public interface Contact {
     default void remove(Contact contact) {}
 
     default boolean isLeaf() {
-        throw new UnsupportedOperationException("todo");
+        return true;
     }
 
     default Iterator<Contact> children() {
-        throw new UnsupportedOperationException("todo");
+        return Collections.emptyIterator();
     }
 }
