@@ -15,7 +15,7 @@ import java.util.concurrent.*;
  * in alphabetical order.
  */
 
-public class EmailGatheringVisitor implements Iterable<String>, Visitor {
+public class EmailGatheringVisitor implements Iterable<String>, DefaultVisitor {
     private final Collection<String> emails = new ConcurrentSkipListSet<>();
 
     public Iterator<String> iterator() {
@@ -24,9 +24,5 @@ public class EmailGatheringVisitor implements Iterable<String>, Visitor {
 
     public void visit(Person p) {
         emails.add(p.getEmail());
-    }
-
-    public void visit(DistributionList dl) {
-        // do nothing
     }
 }
