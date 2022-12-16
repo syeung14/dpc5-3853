@@ -13,33 +13,26 @@ package state.exercise1;
  * up.
  */
 public class Employee {
-    private int type = 0;
+    private State state;
 
     public Employee() {
-        type = 1; // programmer - that's what you start with
+        state = new ProgrammerState();
     }
 
     public int pay() {
-        if (type == 1) { // programmer
-            System.out.println("Programmer getting paid");
-            return 3000;
-        }
-        if (type == 2) { // manager
-            System.out.println("Paying lots of $$$ to manager");
-            return 30000;
-        }
-        if (type == 3) { // retiree
-            System.out.println("Handing out crumbs to retiree");
-            return 5000;
-        }
-        return 0;
+        return state.pay(this);
     }
 
     public void advance() {
-        if (type < 4) type++;
+        state.advance(this);
     }
 
     public void fire() {
-        if (type < 3) type = 4;
+        state.fire(this);
+    }
+
+    void setState(State state) {
+        System.out.println(this.state + " -> " + state);
+        this.state = state;
     }
 }
