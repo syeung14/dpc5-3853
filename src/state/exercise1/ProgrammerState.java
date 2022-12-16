@@ -10,18 +10,18 @@ package state.exercise1;
 
 public class ProgrammerState extends State {
     @Override
-    public int pay(Employee employee) {
+    public int pay(StateModifier sm) {
         System.out.println("Programmer getting paid");
         return 3000;
     }
 
     @Override
-    public void advance(Employee employee) {
-        employee.setState(new ManagerState());
+    public void advance(StateModifier sm) {
+        sm.setState(MANAGER);
     }
 
     @Override
-    public void fire(Employee employee) {
-        employee.setState(new EndState());
+    public void fire(StateModifier sm) {
+        sm.setState(END);
     }
 }

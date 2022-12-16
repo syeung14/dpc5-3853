@@ -10,13 +10,13 @@ package state.exercise1;
 
 public class RetireeState extends State {
     @Override
-    public int pay(Employee employee) {
+    public int pay(StateModifier sm) {
         System.out.println("Handing out crumbs to retiree");
         return 5000;
     }
 
     @Override
-    public void advance(Employee employee) {
-        employee.setState(new EndState());
+    public void advance(StateModifier sm) {
+        sm.setState(END);
     }
 }
