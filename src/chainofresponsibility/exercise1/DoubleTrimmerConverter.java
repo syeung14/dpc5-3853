@@ -7,13 +7,8 @@
  */
 package chainofresponsibility.exercise1;
 
-public class DoubleTrimmerConverter extends Converter{
+public class DoubleTrimmerConverter extends GeneralConverter<Double, Double> {
     public DoubleTrimmerConverter(Converter next) {
-        super(next);
-    }
-
-    public Object handle(Object o) {
-        if (o instanceof Double d) o = (double)Math.round(d);
-        return super.handle(o);
+        super(next, Double.class, d -> (double)Math.round(d));
     }
 }

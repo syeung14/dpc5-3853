@@ -7,13 +7,8 @@
  */
 package chainofresponsibility.exercise1;
 
-public class StringTrimmerConverter extends Converter {
+public class StringTrimmerConverter extends GeneralConverter<String, String> {
     public StringTrimmerConverter(Converter next) {
-        super(next);
-    }
-
-    public Object handle(Object o) {
-        if (o instanceof String s) o = s.trim();
-        return super.handle(o);
+        super(next, String.class, String::trim);
     }
 }

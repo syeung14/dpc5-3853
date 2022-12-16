@@ -7,13 +7,8 @@
  */
 package chainofresponsibility.exercise1;
 
-public class StringUpperCaseConverter extends Converter {
+public class StringUpperCaseConverter extends GeneralConverter<String, String> {
     public StringUpperCaseConverter(Converter next) {
-        super(next);
-    }
-
-    public Object handle(Object o) {
-        if (o instanceof String s) o = s.toUpperCase();
-        return super.handle(o);
+        super(next, String.class, String::toUpperCase);
     }
 }
