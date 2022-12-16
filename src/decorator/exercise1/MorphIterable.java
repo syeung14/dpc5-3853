@@ -7,13 +7,40 @@
  */
 package decorator.exercise1;
 
+import java.util.Iterator;
+
 /**
  * This class should implement Iterable<B>.  The remove() method should remove
  * the item from the input Iterable.
  */
-public class MorphIterable<A, B> {
+public class MorphIterable<A, B> implements Iterable<B> {
+    private final Iterable<A> input;
+    private final Morpher<A, B> morpher;
+
     public MorphIterable(Iterable<A> input, Morpher<A, B> morpher) {
-        throw new UnsupportedOperationException("todo");
+        this.input = input;
+        this.morpher = morpher;
+    }
+
+    @Override
+    public Iterator<B> iterator() {
+        var iterator = input.iterator();
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public B next() {
+                return morpher.morph(iterator.next());
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
+            }
+        };
     }
 
     public interface Morpher<A, B> {

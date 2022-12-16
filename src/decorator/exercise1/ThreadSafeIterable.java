@@ -7,17 +7,38 @@
  */
 package decorator.exercise1;
 
-import java.util.concurrent.locks.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.stream.StreamSupport;
 
 // this class should implement Iterable<T>
-public class ThreadSafeIterable<T> {
+public class ThreadSafeIterable<T> implements Iterable<T> {
+    private final List<T> copy;
+
     // synchronize on the lock and copy the source into a new collection
     public ThreadSafeIterable(Iterable<T> source, Object lock) {
-        throw new UnsupportedOperationException("todo");
+        synchronized (lock) {
+            copy = copy(source);
+        }
     }
 
-    // lock() the Java 5 lock and copy the source into a new collection
     public ThreadSafeIterable(Iterable<T> source, Lock lock) {
-        throw new UnsupportedOperationException("todo");
+        lock.lock();
+        try {
+            copy = copy(source);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return copy.iterator();
+    }
+
+    private List<T> copy(Iterable<T> source) {
+        return StreamSupport.stream(source.spliterator(), false).toList();
     }
 }
