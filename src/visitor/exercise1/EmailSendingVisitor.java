@@ -7,22 +7,18 @@
  */
 package visitor.exercise1;
 
-import java.util.*;
+public class EmailSendingVisitor implements Visitor {
+    private final String msg;
 
-/**
- * This visitor must return a unique set of all emails in the contact structure
- * in alphabetical order.
- */
-public class EmailGatheringVisitor implements Iterable<String>, Visitor {
-    private final Set<String> emails = new TreeSet<>();
-
-    public Iterator<String> iterator() {
-        return emails.stream().iterator();
+    public EmailSendingVisitor(String msg) {
+        this.msg = msg;
     }
 
     @Override
     public void visitPerson(Person p) {
-        emails.add(p.getEmail());
+        System.out.println("To: " + p.getEmail());
+        System.out.println("Msg: " + msg);
+        System.out.println();
     }
 
     @Override

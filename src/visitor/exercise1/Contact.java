@@ -8,7 +8,10 @@
 package visitor.exercise1;
 
 public interface Contact {
-    void sendMail(String msg);
+    default void sendMail(String msg) {
+        accept(new EmailSendingVisitor(msg));
+    }
     default void add(Contact contact) { }
     default void remove(Contact contact) { }
+    void accept(Visitor v);
 }
