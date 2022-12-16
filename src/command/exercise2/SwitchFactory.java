@@ -12,16 +12,10 @@ public class SwitchFactory {
     }
 
     public static Switch make(Fan fan) {
-        return new Switch(
-            new FanStartRotateCommand(fan),
-            new FanStopRotateCommand(fan)
-        );
+        return new Switch(fan::startRotate, fan::stopRotate);
     }
 
     public static Switch make(Light light) {
-        return new Switch(
-            new LightOnCommand(light),
-            new LightOffCommand(light)
-        );
+        return new Switch(light::turnOn, light::turnOff);
     }
 }
