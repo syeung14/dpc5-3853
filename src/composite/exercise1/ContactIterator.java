@@ -7,10 +7,7 @@
  */
 package composite.exercise1;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * This ContactIterator should iterate through the composite tree structure
@@ -21,22 +18,11 @@ public class ContactIterator implements Iterator<Contact> {
     private final Deque<Iterator<Contact>> unfinishedIterators = new ArrayDeque<>();
     private Contact nextContact;
     private Iterator<Contact> lastUsedIterator;
-
-    private final Iterator<Contact> leaves;
+    private boolean nextCalled = false;
 
     public ContactIterator(Contact contact) {
-        ArrayList<Contact> temp = new ArrayList<>();
-        findAllLeaves(contact, temp);
-        leaves = temp.iterator();
-    }
-
-    private void findAllLeaves(Contact contact, ArrayList<Contact> leaves) {
-        if (contact.isLeaf()) leaves.add(contact);
-        else {
-            for (Iterator<Contact> it = contact.children(); it.hasNext(); ) {
-                findAllLeaves(it.next(), leaves);
-            }
-        }
+        if (contact.isLeaf()) nextContact = contact;
+        else unfinishedIterators.addLast(contact.children());
     }
 
     public boolean hasNext() {
@@ -46,10 +32,25 @@ public class ContactIterator implements Iterator<Contact> {
 
     private Contact findNextLeaf() {
         // walk down the tree and find the next leaf...
+        while(!unfinishedIterators.isEmpty()) {
+            lastUsedIterator = unfinishedIterators.getLast();
+            if (lastUsedIterator.hasNext()) {
+                Contact contact = lastUsedIterator.next();
+                if (contact.isLeaf()) return contact;
+                else unfinishedIterators.addLast(contact.children());
+            } else {
+                unfinishedIterators.removeLast();
+            }
+        }
+        return null;
     }
 
     public Contact next() {
-        return leaves.next();
+        if (!hasNext()) throw new NoSuchElementException();
+        Contact result = nextContact;
+        nextContact = null;
+        nextCalled = true;
+        return result;
     }
 
     /**
@@ -58,6 +59,9 @@ public class ContactIterator implements Iterator<Contact> {
      * the composite tree structure.
      */
     public void remove() {
-        throw new UnsupportedOperationException("todo");
+        if (lastUsedIterator == null) throw new IllegalStateException("root node was a leaf");
+        if (!nextCalled) throw new IllegalStateException("remove() called without next()");
+        lastUsedIterator.remove();
+        nextCalled = false;
     }
 }
