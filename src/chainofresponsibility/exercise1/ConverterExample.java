@@ -15,7 +15,7 @@ public class ConverterExample {
         // 4.0
         // INTERESTING
         // SÜSS
-        /*
+        //*
         Converter chain = new DoubleTrimmerConverter(
             new StringUpperCaseConverter(
                 new StringTrimmerConverter(null)

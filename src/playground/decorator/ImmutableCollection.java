@@ -36,4 +36,7 @@ public interface ImmutableCollection<E> {
     Stream<E> parallelStream();
 
     void forEach(Consumer<? super E> action);
+
+    E get(int index);
+//    void printAll();
 }

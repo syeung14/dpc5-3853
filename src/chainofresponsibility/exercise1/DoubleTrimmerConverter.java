@@ -7,10 +7,13 @@
  */
 package chainofresponsibility.exercise1;
 
-public class DoubleTrimmerConverter {
+public class DoubleTrimmerConverter extends Converter{
+    public DoubleTrimmerConverter(Converter next) {
+        super(next);
+    }
+
     public Object handle(Object o) {
-        // if the object is a Double, we trim to the nearest Integer,
-        // but still return a Double instance
-        throw new UnsupportedOperationException("todo");
+        if (o instanceof Double d) o = (double)Math.round(d);
+        return super.handle(o);
     }
 }

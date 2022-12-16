@@ -8,17 +8,23 @@
 
 package playground;
 
-public class Person {
-    private final String firstName;
-    private final String lastName;
-    private final int age;
+import java.util.Comparator;
 
-    public Person(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
-
+public record Person(String firstName, String lastName, int age) {
+    public static final Comparator<Person> NATURAL_OLD = new Comparator<Person>() {
+        @Override
+        public int compare(Person o1, Person o2) {
+            int result = o1.firstName.compareTo(o2.firstName);
+            if (result != 0) return result;
+            result = o1.lastName.compareTo(o2.lastName);
+            if (result != 0) return result;
+            return Integer.compare(o1.age, o2.age);
+        }
+    };
+    public static final Comparator<Person> NATURAL_NEW =
+        Comparator.comparing(Person::firstName)
+            .thenComparing(Person::lastName)
+            .thenComparingInt(Person::age);
 
     public static final class PersonBuilder {
         private String firstName;
