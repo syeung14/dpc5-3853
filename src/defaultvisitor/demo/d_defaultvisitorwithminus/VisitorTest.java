@@ -7,7 +7,7 @@
  */
 package defaultvisitor.demo.d_defaultvisitorwithminus;
 
-/*
+//*
 import defaultvisitor.demo.d_defaultvisitorwithminus.client.*;
 import defaultvisitor.demo.d_defaultvisitorwithminus.framework.Number;
 import defaultvisitor.demo.d_defaultvisitorwithminus.framework.*;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //*/
 
 public class VisitorTest {
-    /*
+    //*
     @Test
     public void onePlusTwoPlusThreePlusFourCounting() {
         Expression expression = new Plus(new Number(1), new Plus(new Number(2), new Plus(new Number(3), new Number(4))));
