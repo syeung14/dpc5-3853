@@ -8,6 +8,7 @@
 package command.exercise1;
 
 //DON'T CHANGE
+// Receiver
 public class Light {
     public void turnOn() {
         System.out.println("Light is on ");

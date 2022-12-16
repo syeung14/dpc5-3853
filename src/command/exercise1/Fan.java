@@ -8,6 +8,7 @@
 package command.exercise1;
 
 //DON'T CHANGE
+// Receiver
 public class Fan {
     public void startRotate() {
         System.out.println("Fan is rotating");

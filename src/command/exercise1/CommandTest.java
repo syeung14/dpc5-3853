@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static util.TestHelpers.*;
 
 //DON'T CHANGE
+// Client
 public class CommandTest {
     @Test
     public void testThatCommandLeftUnchanged() {
