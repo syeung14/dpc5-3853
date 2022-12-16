@@ -8,20 +8,20 @@
 
 package state.exercise1;
 
-public class ManagerState extends State {
+public final class ManagerState extends State {
     @Override
-    public int pay(StateModifier sm) {
+    public int pay() {
         System.out.println("Paying lots of $$$ to manager");
         return 30000;
     }
 
     @Override
-    public void advance(StateModifier sm) {
-        sm.setState(RETIREE);
+    public State advance() {
+        return RETIREE;
     }
 
     @Override
-    public void fire(StateModifier sm) {
-        sm.setState(END);
+    public State fire() {
+        return END;
     }
 }

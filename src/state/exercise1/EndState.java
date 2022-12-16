@@ -8,5 +8,5 @@
 
 package state.exercise1;
 
-public class EndState extends State {
+public final class EndState extends State {
 }

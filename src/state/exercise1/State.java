@@ -7,24 +7,22 @@
  */
 package state.exercise1;
 
-public abstract class State {
+public sealed abstract class State permits
+    EndState, ManagerState, ProgrammerState, RetireeState {
     public static final State PROGRAMMER = new ProgrammerState();
     public static final State MANAGER = new ManagerState();
     public static final State RETIREE = new RetireeState();
     public static final State END = new EndState();
 
-    public int pay(StateModifier sm) {
+    public int pay() {
         return 0;
     }
 
-    public void advance(StateModifier sm) {
+    public State advance() {
+        return this;
     }
 
-    public void fire(StateModifier sm) {
-    }
-
-    @FunctionalInterface
-    public interface StateModifier {
-        void setState(State state);
+    public State fire() {
+        return this;
     }
 }
