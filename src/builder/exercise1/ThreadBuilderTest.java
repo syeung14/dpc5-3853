@@ -53,6 +53,17 @@ public class ThreadBuilderTest {
     }
 
     @Test
+    public void testCreation() {
+        Thread tt = new ThreadBuilder(
+            () -> {
+                System.out.println("ouput");
+            }, "test creation")
+            .threadGroup(new ThreadGroup("tg")).start();
+        assertFalse(tt.isDaemon());
+        assertEquals("test creation", tt.getName());
+    }
+
+    @Test
     public void testDaemonTrue() throws InterruptedException {
         AtomicBoolean ran = new AtomicBoolean(false);
         Thread test = new ThreadBuilder(
@@ -201,4 +212,5 @@ public class ThreadBuilderTest {
         assertTrue(ran.get());
         assertTrue(caught.get(), "Gingerbread Man not caught");
     }
+
 }

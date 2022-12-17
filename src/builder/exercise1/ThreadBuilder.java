@@ -7,13 +7,34 @@
  */
 package builder.exercise1;
 
+import java.util.Optional;
+import java.util.OptionalInt;
+
 public class ThreadBuilder {
+    private ThreadGroup threadGroup;
+    private final String name;
+    private final Runnable target;
+    private long stackSize;
+    private boolean inheritThreadLocals;
+    private Optional<Boolean> daemon = Optional.empty();
+    private OptionalInt priority = OptionalInt.empty();
+    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+
     public ThreadBuilder(Runnable target, String name) {
-        throw new UnsupportedOperationException("TODO");
+        this.target = target;
+        this.name = name;
     }
 
     public Thread build() {
-        throw new UnsupportedOperationException("TODO");
+        Thread thread = new Thread(threadGroup, target, name, stackSize, inheritThreadLocals);
+        priority.ifPresent(thread::setPriority);
+//        if (priority != null) thread.setPriority(priority);
+        daemon.ifPresent(thread::setDaemon);
+//        if (daemon != null) thread.setDaemon(daemon);
+        if (uncaughtExceptionHandler != null) {
+            thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+        }
+        return thread;
     }
 
     public Thread start() {
@@ -23,26 +44,32 @@ public class ThreadBuilder {
     }
 
     public ThreadBuilder threadGroup(ThreadGroup threadGroup) {
-        throw new UnsupportedOperationException("TODO");
+        this.threadGroup = threadGroup;
+        return this;
     }
 
     public ThreadBuilder stackSize(long stackSize) {
-        throw new UnsupportedOperationException("TODO");
+        this.stackSize = stackSize;
+        return this;
     }
 
     public ThreadBuilder inheritThreadLocals(boolean inheritThreadLocals) {
-        throw new UnsupportedOperationException("TODO");
+        this.inheritThreadLocals = inheritThreadLocals;
+        return this;
     }
 
     public ThreadBuilder daemon(boolean daemon) {
-        throw new UnsupportedOperationException("TODO");
+        this.daemon = Optional.of(daemon);
+        return this;
     }
 
     public ThreadBuilder priority(int priority) {
-        throw new UnsupportedOperationException("TODO");
+        this.priority = OptionalInt.of(priority);
+        return this;
     }
 
     public ThreadBuilder uncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
-        throw new UnsupportedOperationException("TODO");
+        this.uncaughtExceptionHandler = uncaughtExceptionHandler;
+        return this;
     }
 }
