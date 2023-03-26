@@ -8,15 +8,18 @@
 package state.exercise1;
 
 public abstract class State {
+    public static final State PROGRAMMER = new Programmer();
+    public static final State MANAGER = new Manager();
+    public static final State RETIREE = new Retiree();
+    public static final State END = new End();
+
     public int pay(Employee employee) {
-        throw new UnsupportedOperationException("todo");
+        return 0;
     }
 
     public void advance(Employee employee) {
-        throw new UnsupportedOperationException("todo");
     }
 
     public void fire(Employee employee) {
-        throw new UnsupportedOperationException("todo");
     }
 }

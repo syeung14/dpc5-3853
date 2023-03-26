@@ -51,6 +51,14 @@ public class DecoratorTest {
         return result;
     }
 
+    private <T> Iterable<T> makeMyRegexIterable(String regex, T... values) {
+        Collection<T> col = new ArrayList<>();
+        Collections.addAll(col, values);
+        Object obj = new RegexIterable<>(col, regex);
+        Iterable<T> res = (Iterable<T>) obj;
+        return res;
+    }
+
     @Test
     public void testMorphIterable() {
         Iterable<Integer> mit = makeMorphIterable();

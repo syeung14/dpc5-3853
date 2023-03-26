@@ -27,8 +27,7 @@ public class TestHelpers {
         return classes;
     }
 
-    public static <E> Collection<Class<? extends E>> getClassesExtending(
-        Class<E> rootClass) throws ClassNotFoundException {
+    public static <E> Collection<Class<? extends E>> getClassesExtending(Class<E> rootClass) throws ClassNotFoundException {
         return getClassesExtending(rootClass, rootClass.getPackageName().replaceAll("\\.", "/"));
     }
 
