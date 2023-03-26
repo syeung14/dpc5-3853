@@ -8,13 +8,24 @@
 package visitor.exercise1;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * This visitor must return a unique set of all emails in the contact structure
  * in alphabetical order.
  */
-public class EmailGatheringVisitor implements Iterable<String> {
+public class EmailGatheringVisitor implements Iterable<String>, Visitor {
+    private final Collection<String> emails = new ConcurrentSkipListSet<>();
     public Iterator<String> iterator() {
-        throw new UnsupportedOperationException("todo");
+        return emails.iterator();
+    }
+
+    @Override
+    public void visit(Person p) {
+        emails.add(p.email());
+    }
+
+    @Override
+    public void visit(DistributionList dl) {
     }
 }

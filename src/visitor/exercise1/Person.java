@@ -19,4 +19,13 @@ public class Person implements Contact {
         System.out.println("Msg: " + msg);
         System.out.println();
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    public String email() {
+        return email;
+    }
 }

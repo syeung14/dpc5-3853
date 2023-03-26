@@ -18,11 +18,21 @@ public class DistributionList implements Contact {
         contacts.forEach(contact -> contact.sendMail(msg));
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        contacts.forEach(c -> c.accept(visitor));
+    }
+
     public void add(Contact contact) {
         contacts.add(contact);
     }
 
     public void remove(Contact contact) {
         contacts.remove(contact);
+    }
+
+    public int getNumberOfchildren() {
+        return contacts.size();
     }
 }
